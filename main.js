@@ -17,6 +17,11 @@ form.addEventListener("submit", (e) => {
     price: Number(form.elements.price.value),
     happy_hour: happy,
     ingredients: form.elements.ingredients.value.split("\n"),
+    color: form.elements.color.value,
+    glass_types: form.elements.glass_types.value,
+    category: form.elements.category.value,
+    percentage: Number(form.elements.percentage.value),
+    garnish: form.elements.garnish.value.split("\n"),
   };
   console.log(obj);
   post(obj);
@@ -39,31 +44,83 @@ function post(payload) {
     body: JSON.stringify(payload),
   })
     .then((res) => res.json())
-    .then((data) => console.log(data));
+    .then((data) => init());
 }
 
-/*
-import "./style.css";
-const APIKEY = "606d5d99f5535004310074edx";
-const endpoint = "https://frontendspring20-9cc3.restdb.io/rest/superheroes";
+async function get() {
+  const res = await fetch(endpoint, {
+    mathod: "GET",
+    headers: {
+      "x-apikey": APIKEY,
+    },
+  });
+  const data = await res.json();
+  return data;
+}
 
-function post() {
-  const hero = {
-    real_name: "Lord JS Von Doom",
-    alias: "Jonas",
-    dob: "2000-01-01",
+async function deleteDrink(id) {
+  const res = await fetch(`${endpoint}/${id}`, {
+    method: "DELETE",
+    headers: {
+      "x-apikey": APIKEY,
+    },
+  });
+  const data = await res.json();
+  init();
+}
+async function toggleHappyHour(id, isHappy) {
+  const nextState = {
+    happy_hour: !isHappy,
   };
-  fetch(endpoint, {
-    method: "POST",
+  const res = await fetch(`${endpoint}/${id}`, {
+    method: "PUT",
     headers: {
       "x-apikey": APIKEY,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(hero),
-  })
-    .then((res) => res.json())
-    .then((data) => console.log(data));
+    body: JSON.stringify(nextState),
+  });
+  const data = await res.json();
+  init();
+}
+document.addEventListener("DOMContentLoaded", init);
+async function init() {
+  console.log("init");
+  //get the data
+  //loop thorugh it
+  const data = await get();
+  document.querySelector("#cards").innerHTML = "";
+  data.forEach(showDrink);
 }
 
+function showDrink(drink) {
+  //grab the template
+  const template = document.querySelector("template").content;
+  //clone it
+  const copy = template.cloneNode(true);
+  //change content
+  copy.querySelector("header h2").textContent = drink.name;
+  copy.querySelector("header p").textContent = drink.category;
+  copy.querySelector(".price span").textContent = drink.price;
+  copy.querySelector("span[data-glass]").textContent = drink.glass_types;
+  copy.querySelector("article").dataset.happyHour = drink.happy_hour;
+  copy.querySelector("progress").value = drink.percentage * 100;
+  copy.querySelector("span[data-percentage]").textContent =
+    drink.percentage * 100 + "%";
+  copy.querySelector(".ingredients ul").innerHTML = getListFromArray(
+    drink.ingredients
+  );
+  copy.querySelector(".garnish ul").innerHTML = getListFromArray(drink.garnish);
+  copy.querySelector(".delete-btn").addEventListener("click", () => {
+    deleteDrink(drink._id);
+  });
+  copy.querySelector(".update-btn").addEventListener("click", () => {
+    toggleHappyHour(drink._id, drink.happy_hour);
+  });
+  //append to the  DOM
+  document.querySelector("#cards").appendChild(copy);
+}
 
-*/
+function getListFromArray(array) {
+  return array.map((item) => `<li>${item}</li>`).join("");
+}

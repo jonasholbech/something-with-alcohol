@@ -213,48 +213,56 @@
     </main>
 
     <!-- <template> -->
-    <article class="card" data-happy-hour="true">
-      <header>
-        <h2>Jonnie's strong drink</h2>
-        <p>Cocktail</p>
-      </header>
+    <template>
+      <article class="card" data-happy-hour="true">
+        <header>
+          <h2>Jonnie's strong drink</h2>
+          <p>Cocktail</p>
+        </header>
 
-      <p class="price"><span data-price>90</span> DKK</p>
+        <p class="price"><span data-price>90</span> DKK</p>
 
-      <p>Best served in a <span data-glass>Highball Glass</span>.</p>
+        <p>Best served in a <span data-glass>Highball Glass</span>.</p>
 
-      <section>
-        <h3>Ingredients</h3>
-        <ul>
-          <li>Gin</li>
-          <li>Tonic water</li>
-        </ul>
-      </section>
+        <section class="ingredients">
+          <h3>Ingredients</h3>
+          <ul>
+            <li>Gin</li>
+            <li>Tonic water</li>
+          </ul>
+        </section>
 
-      <section>
-        <h3>Garnish</h3>
-        <ul>
-          <li>Cucumber</li>
-          <li>Pepper</li>
-        </ul>
-      </section>
+        <section class="garnish">
+          <h3>Garnish</h3>
+          <ul>
+            <li>Cucumber</li>
+            <li>Pepper</li>
+          </ul>
+        </section>
 
-      <section>
-        <h3>Alcohol content</h3>
-        <progress max="100" min="0" value="50">
-          <span data-percentage>50%</span>
-        </progress>
-      </section>
+        <section>
+          <h3>Alcohol content</h3>
+          <progress max="100" min="0" value="50">
+            <span data-percentage>50%</span>
+          </progress>
+        </section>
 
-      <div class="action">
-        <button class="delete-btn" data-delete>
-          <span>Delete</span>
-          <svg aria-hidden="true" width="30" height="30">
-            <use href="#delete" />
-          </svg>
-        </button>
-      </div>
-    </article>
+        <div class="action">
+          <button class="delete-btn" data-delete>
+            <span>Delete</span>
+            <svg aria-hidden="true" width="30" height="30">
+              <use href="#delete" />
+            </svg>
+          </button>
+          <button class="update-btn" data-update>
+            <span>Update</span>
+            <svg aria-hidden="true" width="30" height="30">
+              <use href="#delete" />
+            </svg>
+          </button>
+        </div>
+      </article>
+    </template>
     <!-- </template> -->
 
     <!-- SVG ICONS -->
