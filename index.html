@@ -51,6 +51,7 @@
               <span class="hint">Enter beverage name</span>
             </label>
             <input id="name" type="text" name="name" required />
+            <span class="hidden">Please do better</span>
           </div>
 
           <div class="form-group">
@@ -290,6 +291,15 @@
       </symbol>
     </svg>
 
+    <style>
+      .btn:disabled {
+        opacity: 0.5;
+      }
+      .hidden {
+        display: none;
+        color: red;
+      }
+    </style>
     <script type="module" src="/main.js"></script>
   </body>
 </html>
